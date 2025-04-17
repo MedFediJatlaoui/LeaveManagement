@@ -14,7 +14,13 @@ namespace LeaveManagement.Services
 
         Task<bool> DeleteLeaveRequestAsync(int id);
         Task<PaginatedResult<LeaveRequestDto>> FilterLeaveRequestsAsync(
-    int? employeeId, LeaveType? leaveType, LeaveStatus? status, DateTime? startDate, DateTime? endDate,
-    string? keyword, int page, int pageSize, string sortBy, string sortOrder);
+        int? employeeId, LeaveType? leaveType, LeaveStatus? status, DateTime? startDate, DateTime? endDate,
+        string? keyword, int page, int pageSize, string sortBy, string sortOrder);
+        Task<IEnumerable<LeaveSummaryDto>> GetLeaveSummaryReportAsync(
+        int year, string? department, DateTime? startDate, DateTime? endDate);
+        Task<bool> ApproveLeaveRequestAsync(int id);
+
     }
+
+
 }

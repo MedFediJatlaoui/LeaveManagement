@@ -33,7 +33,7 @@ namespace LeaveManagement.Services
 
         public async Task<LeaveRequestDto> CreateLeaveRequestAsync(LeaveRequestDto dto)
         {
-            // Business Rule 1: No overlapping leave dates per employee
+            //No overlapping leave dates per employee
             bool overlaps = await _context.LeaveRequests.AnyAsync(lr =>
                 lr.EmployeeId == dto.EmployeeId &&
                 lr.StartDate < dto.EndDate &&
@@ -41,7 +41,7 @@ namespace LeaveManagement.Services
             if (overlaps)
                 throw new InvalidOperationException("Employee already has a leave request that overlaps with the given dates.");
 
-            // Business Rule 2: Max 20 annual leave days per year
+            //Max 20 annual leave days per year
             if (dto.LeaveType == "Annual")
             {
                 var year = dto.StartDate.Year;
@@ -139,11 +139,9 @@ namespace LeaveManagement.Services
                 query = query.OrderBy(GetSortExpression(sortBy));
             }
 
-            // Pagination
             var totalItems = await query.CountAsync();
             var items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
 
-            // Mapping
             var mappedItems = _mapper.Map<List<LeaveRequestDto>>(items);
 
             return new PaginatedResult<LeaveRequestDto>
@@ -153,6 +151,60 @@ namespace LeaveManagement.Services
                 Page = page,
                 PageSize = pageSize
             };
+        }
+
+      public async Task<IEnumerable<LeaveSummaryDto>> GetLeaveSummaryReportAsync(
+    int year, string? department, DateTime? startDate, DateTime? endDate)
+        {
+            var query = _context.LeaveRequests
+                .Include(lr => lr.Employee)
+                .AsQueryable();
+
+            query = query.Where(lr => lr.StartDate.Year == year);
+
+            if (!string.IsNullOrEmpty(department))
+            {
+                query = query.Where(lr => lr.Employee.Department == department);
+            }
+
+            if (startDate.HasValue)
+            {
+                query = query.Where(lr => lr.StartDate >= startDate.Value);
+            }
+
+            if (endDate.HasValue)
+            {
+                query = query.Where(lr => lr.EndDate <= endDate.Value);
+            }
+
+            // Groupement par employé
+            var groupedData = await query
+                .GroupBy(lr => lr.Employee)
+                .Select(g => new LeaveSummaryDto
+                {
+                    Employee = g.Key.FullName,
+                    TotalLeaves = g.Count(),
+                    AnnualLeaves = g.Count(lr => lr.LeaveType == LeaveType.Annual),
+                    SickLeaves = g.Count(lr => lr.LeaveType == LeaveType.Sick)
+                })
+                .ToListAsync();
+
+            return groupedData;
+        }
+        public async Task<bool> ApproveLeaveRequestAsync(int id)
+        {
+            var leaveRequest = await _context.LeaveRequests.FindAsync(id);
+
+            if (leaveRequest == null || leaveRequest.Status != LeaveStatus.Pending)
+            {
+                return false; 
+            }
+
+            leaveRequest.Status = LeaveStatus.Approved;
+            _context.LeaveRequests.Update(leaveRequest);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
     }
 }

@@ -68,5 +68,22 @@ namespace LeaveManagement.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("report")]
+        public async Task<IActionResult> GetLeaveSummaryReport(
+        [FromQuery] int year,
+        [FromQuery] string? department = null,
+        [FromQuery] DateTime? startDate = null,
+        [FromQuery] DateTime? endDate = null)
+        {
+            var result = await _service.GetLeaveSummaryReportAsync(year, department, startDate, endDate);
+            return Ok(result);
+        }
+        [HttpPost("{id}/approve")]
+        public async Task<IActionResult> ApproveLeaveRequest(int id)
+        {
+            var success = await _service.ApproveLeaveRequestAsync(id);
+            return success ? NoContent() : BadRequest("Only pending requests can be approved.");
+        }
     }
 }
