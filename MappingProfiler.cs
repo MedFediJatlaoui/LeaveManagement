@@ -9,7 +9,6 @@
         {
             public MappingProfile()
             {
-                // Mapping between LeaveRequest and LeaveRequestDto
                 CreateMap<LeaveRequest, LeaveRequestDto>();
                 CreateMap<LeaveRequestDto, LeaveRequest>();
             }

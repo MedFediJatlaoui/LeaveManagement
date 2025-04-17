@@ -1,4 +1,6 @@
-﻿using LeaveManagement.DTOs;
+﻿using LeaveManagement.Data;
+using LeaveManagement.DTOs;
+using LeaveManagement.Enums;
 
 namespace LeaveManagement.Services
 {
@@ -11,5 +13,8 @@ namespace LeaveManagement.Services
         Task<bool> UpdateLeaveRequestAsync(int id, LeaveRequestDto leaveRequestDto);
 
         Task<bool> DeleteLeaveRequestAsync(int id);
+        Task<PaginatedResult<LeaveRequestDto>> FilterLeaveRequestsAsync(
+    int? employeeId, LeaveType? leaveType, LeaveStatus? status, DateTime? startDate, DateTime? endDate,
+    string? keyword, int page, int pageSize, string sortBy, string sortOrder);
     }
 }

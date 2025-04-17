@@ -1,4 +1,5 @@
 ﻿using LeaveManagement.DTOs;
+using LeaveManagement.Enums;
 using LeaveManagement.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,6 +49,24 @@ namespace LeaveManagement.Controllers
         {
             var success = await _service.DeleteLeaveRequestAsync(id);
             return success ? NoContent() : NotFound();
+        }
+        [HttpGet("filter")]
+        public async Task<IActionResult> FilterLeaveRequests(
+    [FromQuery] int? employeeId,
+    [FromQuery] LeaveType? leaveType,
+    [FromQuery] LeaveStatus? status,
+    [FromQuery] DateTime? startDate,
+    [FromQuery] DateTime? endDate,
+    [FromQuery] string? keyword,
+    [FromQuery] int page = 1,
+    [FromQuery] int pageSize = 10,
+    [FromQuery] string sortBy = "StartDate",
+    [FromQuery] string sortOrder = "asc")
+        {
+            var result = await _service.FilterLeaveRequestsAsync(
+                employeeId, leaveType, status, startDate, endDate, keyword, page, pageSize, sortBy, sortOrder);
+
+            return Ok(result);
         }
     }
 }
