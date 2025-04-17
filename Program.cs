@@ -17,6 +17,8 @@ builder.Services.AddControllers()
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<ILeaveRequestService, LeaveRequestService>();
+builder.Services.AddScoped<LeaveRequestRepository>();
+
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
