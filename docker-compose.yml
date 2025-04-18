@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  leavemanagement-api:
+    build: .
+    image: fediijat/leavemanagement-api
+    ports:
+      - "5006:5006"
+    volumes:
+      - ./leave.db:/app/leave.db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5006
+    networks:
+      - leavemanagement-network
+
+networks:
+  leavemanagement-network:
+    driver: bridge
