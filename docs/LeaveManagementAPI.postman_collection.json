@@ -1,0 +1,438 @@
+{
+	"info": {
+		"_postman_id": "5113c585-dbe5-44e1-8364-0fe692a7e186",
+		"name": "LeaveManagementAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13875826",
+		"_collection_link": "https://www.postman.com/lunar-module-cosmologist-83540379/leavemangementapi/collection/t8whzyr/leavemanagementapi?action=share&source=collection_link&creator=13875826"
+	},
+	"item": [
+		{
+			"name": "GetAll",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5006/api/LeaveRequest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5006",
+					"path": [
+						"api",
+						"LeaveRequest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add LeaveRequest",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"employeeId\": 1,\r\n  \"leaveType\": \"Annual\",\r\n  \"startDate\": \"2025-04-18T09:00:10.118Z\",\r\n  \"endDate\": \"2025-04-18T09:00:10.118Z\",\r\n  \"status\": \"Pending\",\r\n  \"reason\": \"Vacation\",\r\n  \"createdAt\": \"2025-04-18T09:00:10.118Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5006/api/LeaveRequest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5006",
+					"path": [
+						"api",
+						"LeaveRequest"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "no Reason no Status",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"employeeId\": 1,\r\n  \"leaveType\": \"Annual\",\r\n  \"startDate\": \"2025-04-18T09:00:10.118Z\",\r\n  \"endDate\": \"2025-04-18T09:00:10.118Z\",\r\n  \"status\": \"\",\r\n  \"reason\": \"\",\r\n  \"createdAt\": \"2025-04-18T09:00:10.118Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://leavemanagement-api.onrender.com/api/LeaveRequest",
+							"protocol": "https",
+							"host": [
+								"leavemanagement-api",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"LeaveRequest"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Sick with no reason",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"employeeId\": 1,\r\n  \"leaveType\": \"Annual\",\r\n  \"startDate\": \"2025-04-18T09:00:10.118Z\",\r\n  \"endDate\": \"2025-04-18T09:00:10.118Z\",\r\n  \"status\": \"Pending\",\r\n  \"reason\": \"Vacation\",\r\n  \"createdAt\": \"2025-04-18T09:00:10.118Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://leavemanagement-api.onrender.com/api/LeaveRequest",
+							"protocol": "https",
+							"host": [
+								"leavemanagement-api",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"LeaveRequest"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Overlap",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"employeeId\": 1,\r\n  \"leaveType\": \"Sick\",\r\n  \"startDate\": \"2025-04-18T08:00:00.000Z\",  \r\n  \"endDate\": \"2025-04-18T10:00:00.000Z\",    \r\n  \"status\": \"Pending\",\r\n  \"reason\": \"Flu symptoms\",\r\n  \"createdAt\": \"2025-04-18T09:00:10.118Z\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://leavemanagement-api.onrender.com/api/LeaveRequest",
+							"protocol": "https",
+							"host": [
+								"leavemanagement-api",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"LeaveRequest"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "getLeaveRequestById",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5006/api/LeaveRequest/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5006",
+					"path": [
+						"api",
+						"LeaveRequest",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"employeeId\": 1,\r\n    \"leaveType\": \"Sick\",\r\n    \"startDate\": \"2025-08-01T00:00:00\",\r\n    \"endDate\": \"2025-08-05T00:00:00\",\r\n    \"status\": \"Approved\",\r\n    \"reason\": \"Family vacation\",\r\n    \"createdAt\": \"2025-07-20T00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5006/api/LeaveRequest/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5006",
+					"path": [
+						"api",
+						"LeaveRequest",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteLeaveRequest",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5006/api/LeaveRequest/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5006",
+					"path": [
+						"api",
+						"LeaveRequest",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Leave Management Filter byEmployeeId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5006/api/LeaveRequest/filter?employeeId=1&page=1&pageSize=10&sortBy=StartDate&sortOrder=asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5006",
+					"path": [
+						"api",
+						"LeaveRequest",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "employeeId",
+							"value": "1"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						},
+						{
+							"key": "sortBy",
+							"value": "StartDate"
+						},
+						{
+							"key": "sortOrder",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Leave Management Filter byLeaveType",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5006/api/LeaveRequest/filter?leaveType=Annual&page=1&pageSize=10&sortBy=StartDate&sortOrder=asc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5006",
+							"path": [
+								"api",
+								"LeaveRequest",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "leaveType",
+									"value": "Annual"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "sortBy",
+									"value": "StartDate"
+								},
+								{
+									"key": "sortOrder",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Leave Management Filter byEmployeeId",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5006/api/LeaveRequest/filter?keyword=Family&page=1&pageSize=10&sortBy=StartDate&sortOrder=asc\n",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5006",
+							"path": [
+								"api",
+								"LeaveRequest",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "Family"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "sortBy",
+									"value": "StartDate"
+								},
+								{
+									"key": "sortOrder",
+									"value": "asc\n"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Report By year",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5006/api/LeaveRequest/report?year=2025",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5006",
+					"path": [
+						"api",
+						"LeaveRequest",
+						"report"
+					],
+					"query": [
+						{
+							"key": "year",
+							"value": "2025"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Approve LeaveRequest",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5006/api/LeaveRequest/4/approve",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5006",
+					"path": [
+						"api",
+						"LeaveRequest",
+						"4",
+						"approve"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

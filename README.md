@@ -60,15 +60,26 @@ cd leave-management-api
 ```bash
 docker-compose up 
 ```
-### 3. Access Swagger UI
+### 3. Access Swagger UI or Import Postman Collection
 
-Once the Docker containers are up and running, you can test the API by accessing the Swagger UI.
+Once the Docker containers are up and running, you can test the API by accessing the Swagger UI or importing the Postman collection.
 
-1. Open your browser and go to the following URL:  
-   👉 [http://localhost:5006/swagger/index.html]
+1. **Access Swagger UI**  
+   Open your browser and go to the following URL:  
+   👉 [http://localhost:5006/swagger/index.html](http://localhost:5006/swagger/index.html)
 
-2. This will open the Swagger UI, where you can explore and test all the available API endpoints.
+   This will open the Swagger UI, where you can explore and test all the available API endpoints.
 
-3. Use the interactive interface to make requests directly from the browser and see the responses in real time.
+2. **Use Swagger UI**  
+   Use the interactive interface to make requests directly from the browser and see the responses in real time.
 
    The Swagger UI provides an easy and visual way to interact with your API, making it ideal for both testing and documentation.
+
+3. **Import Postman Collection**  
+   Alternatively, you can test the API by importing the Postman collection, which is available in the `/docs` folder of the repository.
+
+   To import the Postman collection:
+   - Open **Postman**
+   - Click on the **Import** button
+   - Select the **file** from the `/docs` folder or use the **link** to import it
+   - Once imported, you can start testing the API endpoints from Postman.
